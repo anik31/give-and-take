@@ -1,5 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
-import { Avatar, Box, Image, Wrap, WrapItem, Link, Button, Text } from '@chakra-ui/react';
+import { Avatar, Box, Wrap, WrapItem, Link, Button, Text } from '@chakra-ui/react';
 import { MoonIcon } from '@chakra-ui/icons';
 
 export function Navbar(){

@@ -5,7 +5,7 @@ import { MoonIcon } from '@chakra-ui/icons';
 export function Navbar(){
     return ( 
         <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" 
-            px={10} py={3} pos="sticky" top={0} w="100%"
+            px={10} py={3} pos="sticky" top={0} w="100%" zIndex="sticky"
             backdropFilter='auto' backdropBlur='7px' 
             borderBottom='1px' borderColor='gray.200'
         >

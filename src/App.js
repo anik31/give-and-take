@@ -1,4 +1,4 @@
-import { Navbar } from "components";
+import { Navbar, RequireAuth, RestrictAuth } from "components";
 import { Home, Login, Profile, Signup } from "pages";
 import { Route, Routes } from "react-router-dom";
 
@@ -7,10 +7,10 @@ function App() {
     <div className="App">
       <Navbar/>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<RequireAuth> <Home /> </RequireAuth>} />
+        <Route path="/profile" element={<RequireAuth> <Profile /> </RequireAuth>} />
+        <Route path="/login" element={<RestrictAuth> <Login /> </RestrictAuth>} />
+        <Route path="/signup" element={<RestrictAuth> <Signup /> </RestrictAuth>} />
       </Routes>
     </div>
   );

@@ -1,6 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
-import { Avatar, Box, Wrap, WrapItem, Link, Button, Text } from '@chakra-ui/react';
-import { MoonIcon } from '@chakra-ui/icons';
+import { Avatar, Box, Wrap, WrapItem, Link, Text } from '@chakra-ui/react';
 import { useAuth } from "context";
 
 export function Navbar(){
@@ -22,10 +21,6 @@ export function Navbar(){
                     <Avatar size='sm' name={user.displayName} />
                     <Link fontSize='1rem' as={RouterLink} to="/profile">Hello, {user.displayName}</Link>
                 </WrapItem>}
-                
-                <WrapItem>
-                    <Button variant='ghost'><MoonIcon w={5} h={5} color='gray.500' /></Button>
-                </WrapItem>
             </Wrap>
         </Box>
     );

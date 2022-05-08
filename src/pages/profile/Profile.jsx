@@ -4,11 +4,11 @@ import {DataTabs} from "./DataTabs";
 
 const tabData = [
     {
-      label: 'Nigerian Jollof',
+      label: 'My Pull Requests',
       content: 'Perhaps the greatest dish ever invented.',
     },
     {
-      label: 'Pounded Yam & Egusi',
+      label: 'Reviewed Pull Requests',
       content:
         'Perhaps the surest dish ever invented but fills the stomach more than rice.',
     },
@@ -18,7 +18,7 @@ export function Profile(){
     return (
         <>
             <Flex justify="center" align="center" mt="2rem" gap={10}>
-                <Avatar size='2xl' name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
+                <Avatar size='2xl' name='Segun Adebayo'/>
                 <Flex direction="column">
                     <Text fontSize="3xl">Aniet Prksf</Text>
                     <Text fontSize="xl">test@test.com</Text>

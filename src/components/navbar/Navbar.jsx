@@ -16,7 +16,7 @@ export function Navbar(){
 
             <Wrap>
                 <WrapItem display="flex" alignItems="center" justifyContent="center" gap={2}>
-                    <Avatar size='sm' name='Ryan Florence' src='https://bit.ly/ryan-florence' />
+                    <Avatar size='sm' name='Ryan Florence'/>
                     <Link fontSize='1rem' as={RouterLink} to="/profile">Hello, User</Link>
                 </WrapItem>
                 

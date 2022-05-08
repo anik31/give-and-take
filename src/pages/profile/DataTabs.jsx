@@ -2,7 +2,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
 export function DataTabs({ data }) {
     return (
-      <Tabs>
+      <Tabs isFitted mt={5}>
         <TabList>
           {data.map((tab, index) => (
             <Tab key={index}>{tab.label}</Tab>

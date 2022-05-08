@@ -1,7 +1,6 @@
-import { Avatar, Flex, Text, IconButton, Button } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons'
 import {DataTabs} from "./DataTabs";
-import { useAuth } from 'context';
+import { useAuth, useMyPulls, useReviewedPulls } from 'context';
 import {
     Modal,
     ModalOverlay,
@@ -13,26 +12,46 @@ import {
     useDisclosure,
     FormControl,
     FormLabel,
-    Input
+    Input,
+    Avatar, Flex, Text, IconButton, Button
 } from '@chakra-ui/react';
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
-const tabData = [
-    {
-      label: 'My Pull Requests',
-      content: 'Perhaps the greatest dish ever invented.',
-    },
-    {
-      label: 'Reviewed Pull Requests',
-      content:
-        'Perhaps the surest dish ever invented but fills the stomach more than rice.',
-    },
-]
+const initialUserInfo = {
+    pod: "",
+    team: "",
+    gitUser: "",
+    reviewScore: 0
+}
 
 export function Profile(){
     const {logoutUser, user} = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const initialRef = useRef();
+    const {myPullsState, addUserInfo} = useMyPulls();
+    const {reviewedPullsState} = useReviewedPulls();
+    const [userInfo, setUserInfo] = useState(initialUserInfo);
+    const {pod, team, gitUser, reviewScore} = myPullsState.userInfo;
+
+    const tabData = [
+        {
+          label: 'My Pull Requests',
+          content: myPullsState.myPulls,
+        },
+        {
+          label: 'Reviewed Pull Requests',
+          content:
+            reviewedPullsState,
+        },
+    ]
+    
+    const updateUserInfoHandler = () => {
+        if(userInfo.pod!=="" && userInfo.team!=="" && userInfo.gitUser!==""){
+            addUserInfo(userInfo);
+        }
+        setUserInfo(initialUserInfo);
+        onClose();
+    }
 
     return (
         <>
@@ -45,12 +64,18 @@ export function Profile(){
             </Flex>
 
             <Flex justify="center" align="center" mt={2} gap={10}>
-                <Text fontSize="xl">POD - D</Text>
-                <Text fontSize="xl">TEAM - D3</Text>
-                <IconButton variant="outline" aria-label='Search database' icon={<EditIcon />} onClick={onOpen} />
+                <Text fontSize="xl">POD - {pod}</Text>
+                <Text fontSize="xl">TEAM - {team}</Text>
+            </Flex>
+
+            <Flex justify="center" align="center" mt={2} gap={10}>
+                <Text fontSize="xl">Github Username - {gitUser}</Text>
+                <Text fontSize="xl">Review Score - {reviewScore}</Text>
+                <IconButton variant="outline" aria-label='Search database' icon={<EditIcon />} 
+                onClick={onOpen} />
                 <Button colorScheme="red" variant="outline" onClick={()=>logoutUser()}>Logout</Button>
             </Flex>
-    
+
             <DataTabs data={tabData} />
             
             <Modal isCentered isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
@@ -65,13 +90,20 @@ export function Profile(){
                 <ModalBody>
                     <FormControl>
                         <FormLabel>POD</FormLabel>
-                        <Input ref={initialRef} placeholder='POD' />
+                        <Input ref={initialRef} placeholder='POD' value={userInfo.pod} 
+                        onChange={({target})=>setUserInfo(prev=>({...prev,pod:target.value}))} />
+                        
                         <FormLabel>Team</FormLabel>
-                        <Input placeholder='Team' />
+                        <Input placeholder='Team' value={userInfo.team} 
+                        onChange={({target})=>setUserInfo(prev=>({...prev,team:target.value}))} />
+                        
+                        <FormLabel>Github Username</FormLabel>
+                        <Input placeholder='Github Username' value={userInfo.gitUser} 
+                        onChange={({target})=>setUserInfo(prev=>({...prev,gitUser:target.value}))} />
                     </FormControl>
                 </ModalBody>
                 <ModalFooter>
-                    <Button colorScheme='blue' mr={3}>
+                    <Button colorScheme='blue' mr={3} onClick={updateUserInfoHandler}>
                     Save
                     </Button>
                     <Button onClick={onClose}>Cancel</Button>

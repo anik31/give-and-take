@@ -1,4 +1,5 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Grid } from '@chakra-ui/react';
+import { LinkCard } from 'components';
 
 export function DataTabs({ data }) {
     return (
@@ -11,7 +12,9 @@ export function DataTabs({ data }) {
         <TabPanels>
           {data.map((tab, index) => (
             <TabPanel p={4} key={index}>
-              {tab.content}
+              <Grid templateColumns='repeat(2, 1fr)' justifyItems="center" gap={10} my={5}>
+                {tab.content.map(pull=><LinkCard value={pull} key={pull.id} />)}
+              </Grid>
             </TabPanel>
           ))}
         </TabPanels>
